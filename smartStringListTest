@@ -1,0 +1,35 @@
+import java.util.*;
+/**
+ * Program that tests all the methods in the SmartStringList class
+ *
+ * @author Ronaldo Ramirez
+ * @version 12/01/20
+ */
+public class SmartStringListTest{
+   public static void main(String[] args){
+      SmartStringList unsorted = new SmartStringList(5);
+      //testing for unsorted array
+      unsorted.add("z");//testing the add method
+      unsorted.add("b");
+      unsorted.add("r");
+      unsorted.add("g");
+      unsorted.add("a");
+      System.out.println(unsorted.indexOf("z"));//testing the indexOf method
+      unsorted.sort();//testing the sort method
+      unsorted.print();//printing the array after sorting it
+      unsorted.printtof();//printing the value of the boolean variable "sorted"
+      System.out.println(unsorted.get(4));//testing the get method
+      //testing for sorted array
+      SmartStringList sorted = new SmartStringList(5);
+      sorted.add("a");//testing the add method
+      sorted.add("b");
+      sorted.add("c");
+      sorted.add("d");
+      sorted.add("e");
+      System.out.println(sorted.indexOf("z"));//testing the indexOf method
+      sorted.sort();//testing the sort method
+      sorted.print();//printing the array after sorting it
+      sorted.printtof();//printing the value of the boolean variable "sorted"
+      System.out.println(sorted.get(3));//testing the get method
+   }
+}
