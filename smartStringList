@@ -1,0 +1,119 @@
+import java.util.*;
+/**
+ * Program that creates an array of strings and performs the appropriate indexOf method depending on if the array is sorted or not sorted.
+ * In the case that the array is not sorted the sort method performs a seleciton sort otherwise it does nothing.
+ *
+ * @author Ronaldo Ramirez
+ * @version 12/01/20
+ */
+public class SmartStringList{
+   private boolean sorted = true;
+   private String[] list;
+   private int count = 0;
+   private int capacity = 0;
+   /**
+    * This constructor creates an array of the given size
+    * 
+    * @param capacity Maximum size of the array
+    */
+   public SmartStringList(int capacity){
+      list = new String[capacity];
+      this.capacity = capacity;
+   }
+   /**
+    * Adds strings to the array
+    * 
+    * @param s String you wish to add
+    */
+   public void add(String s){
+      if(count <= capacity){
+         list[count] = s;
+        
+      }
+      if(count >= 1){
+         if(s.compareToIgnoreCase(list[count-1]) < 0){
+            sorted = false;
+         }
+      }
+      count++;
+   }
+   /**
+    * Gets the string at the given index
+    * 
+    * @param i The index at which you wish to obtain a string
+    * @return str String which you chose
+    */
+   public String get(int i){
+      String str = list[i];
+      return str;
+   }
+   /**
+    * Returns the index of the ocurrence of the given string in the array, if the string is not found we return -1.  
+    * If the array is sorted it performs a binary search otherwise it performs a linear search.
+    *
+    * @param s String which you want to know the index
+    * @return the index of the string
+    */
+   public int indexOf(String s){
+      if(sorted == true){
+         int min = 0;
+         int max = list.length-1;
+         while(max >= min){
+            int mid = (min+max)/2; 
+            if(list[mid].equalsIgnoreCase(s)){
+               return mid;
+            }
+            else if(list[mid].compareToIgnoreCase(s) < 0){
+               min = mid+1;
+            }
+            else{
+               max = mid-1;
+            }
+         }
+         return -1;
+      }
+      else{
+         for(int i = 0; i < list.length; i++){
+            if(list[i].equalsIgnoreCase(s)){
+               return i;
+            }
+         }
+         return -1;
+      }
+   }
+   /**
+    * Sorts the array of strings using selection sort
+    * 
+    */
+   public void sort(){
+      if(sorted == false){
+         int j;
+         for(int i = 0; i < list.length-1 ; i++){
+            int min = i;
+            for(j = i+1; j < list.length; j++){
+               if(list[j].compareToIgnoreCase(list[min]) < 0){
+                  min = j;
+               }
+            }
+            String temp = list[i];
+            list[i] = list[min];
+            list[min] = temp;
+         }
+         sorted = true;
+      }
+   }
+   /**
+    * Method for testing purposes. This method prints the array 
+    * 
+    */
+   public void print(){
+      System.out.println(Arrays.toString(list));
+   }
+   /**
+    * Method for testing purposes. This method prints the value of the boolean variable "sorted"
+    * 
+    */
+   public void printtof(){
+      System.out.println(sorted);
+   }
+}
